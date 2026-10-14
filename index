@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Foxverse — Digital Systems, Built Once, Licensed Everywhere</title>
+<meta name="description" content="The Foxverse builds production-ready digital systems that businesses can license, customize and deploy.">
+<meta name="color-scheme" content="dark">
+<style>
+:root{
+  --bg:#1c0f07; --text:#fff3df; --muted:#dcc6a6;
+  --glass-b:rgba(255,226,180,.26);
+  --accent:#ff7a14; --accent2:#ffb457;
+  --radius:28px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.6;overflow-x:hidden;padding-bottom:110px;
+}
+/* animated liquid background */
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:
+  radial-gradient(circle at 20% 10%,#ff7a1450,transparent 55%),
+  radial-gradient(circle at 85% 90%,#8a4a1c55,transparent 55%),var(--bg)}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;animation:float 18s ease-in-out infinite}
+.b1{width:60vmax;height:60vmax;left:-20vmax;top:-10vmax;background:#c4580c}
+.b2{width:50vmax;height:50vmax;right:-18vmax;top:25vh;background:#6b3a1a;animation-delay:-6s}
+.b3{width:45vmax;height:45vmax;left:10vw;bottom:-22vmax;background:#e69a4c;animation-delay:-11s}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(6vw,-5vh) scale(1.12)}}
+@media (prefers-reduced-motion:reduce){.blob{animation:none}html{scroll-behavior:auto}}
+
+/* glass */
+.glass{
+  background:linear-gradient(135deg,rgba(255,238,210,.18),rgba(255,238,210,.05));
+  -webkit-backdrop-filter:blur(22px) saturate(160%);
+  backdrop-filter:blur(22px) saturate(160%);
+  border:1px solid var(--glass-b);
+  box-shadow:0 20px 50px rgba(20,8,0,.45), inset 0 1px 0 rgba(255,240,215,.4);
+  border-radius:var(--radius);
+}
+
+/* liquid glass nav */
+.nav{
+  position:fixed;left:50%;transform:translateX(-50%);
+  bottom:calc(18px + env(safe-area-inset-bottom,0px));
+  z-index:10;display:flex;gap:4px;padding:10px 12px;border-radius:999px;
+  max-width:calc(100% - 24px);
+}
+.nav a{
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:8px 14px;border-radius:999px;color:var(--text);text-decoration:none;
+  font-size:.72rem;opacity:.8;transition:.25s;
+}
+.nav a svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.nav a:hover,.nav a.active{opacity:1;background:rgba(255,255,255,.16)}
+
+/* layout */
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+section{padding:72px 0 8px}
+h2{font-size:clamp(1.6rem,4vw,2.3rem);margin-bottom:8px;letter-spacing:-.01em}
+.lead{color:var(--muted);max-width:620px;margin-bottom:28px}
+
+/* hero */
+.hero{min-height:88vh;display:flex;align-items:center;justify-content:center;text-align:center;
+  padding-top:max(40px,env(safe-area-inset-top,0px))}
+.hero .glass{padding:clamp(32px,6vw,64px) clamp(22px,5vw,56px);max-width:760px}
+.hero h1{font-size:clamp(2.2rem,8vw,4.4rem);line-height:1.05;letter-spacing:-.02em}
+.hero h1 b{font-weight:800}
+.hero h1 span{font-weight:300}
+.hero p{margin:18px auto 28px;color:var(--muted);font-size:clamp(1rem,2.6vw,1.2rem);max-width:540px}
+.btn{
+  display:inline-block;padding:14px 30px;border-radius:999px;font-weight:600;text-decoration:none;
+  color:#2a1608;background:linear-gradient(135deg,var(--accent),var(--accent2));
+  box-shadow:0 10px 30px rgba(255,122,20,.45);transition:.25s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:rgba(255,255,255,.08);border:1px solid var(--glass-b);box-shadow:none;margin-left:8px}
+
+/* cards */
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.card{padding:26px}
+.card .tag{display:inline-block;font-size:.7rem;padding:3px 10px;border-radius:999px;
+  background:rgba(255,255,255,.14);margin-bottom:12px;letter-spacing:.05em}
+.card h3{font-size:1.25rem;margin-bottom:6px}
+.card p{color:var(--muted);font-size:.95rem}
+.step .n{font-size:2rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* contact */
+.contact{max-width:460px;margin:0 auto;padding:34px;text-align:center}
+.contact p{color:var(--muted);margin-bottom:22px}
+.field{width:100%;background:none;border:0;border-bottom:1px solid var(--glass-b);
+  color:var(--text);padding:12px 2px;margin-bottom:18px;font:inherit;outline:none}
+.field::placeholder{color:var(--muted)}
+.field:focus{border-color:var(--accent2)}
+.contact .btn{width:100%;border:0;cursor:pointer;font:inherit;font-weight:600}
+
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:56px 20px 10px}
+@media (max-width:480px){.nav a{padding:8px 10px}.btn.ghost{margin:10px 0 0}}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+
+<nav class="nav glass" aria-label="Main">
+  <a href="#home" class="active"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Home</a>
+  <a href="#products"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg>Products</a>
+  <a href="#how"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>How</a>
+  <a href="#contact"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Contact</a>
+</nav>
+
+<main>
+  <header class="hero" id="home">
+    <div class="wrap">
+      <div class="glass">
+        <h1><b>THE</b> <span>FOXVERSE</span></h1>
+        <p>Production-ready digital systems. Built once, licensed to many, customized for each.</p>
+        <a class="btn" href="#products">Explore Products</a>
+        <a class="btn ghost" href="#contact">Get in Touch</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="products"><div class="wrap">
+    <h2>Our Products</h2>
+    <p class="lead">Real, working systems, not mockups. Each one is ready to license, brand and deploy for your business.</p>
+    <div class="grid">
+      <article class="glass card"><span class="tag">OPERATIONS</span><h3>NOVA</h3>
+        <p>A project operations platform with planning, tasks and team workload dashboards.</p></article>
+      <article class="glass card"><span class="tag">SAAS</span><h3>VERITRA</h3>
+        <p>A revenue leakage system that helps businesses find and recover lost income.</p></article>
+      <article class="glass card"><span class="tag">AVIATION</span><h3>Airline Digital System</h3>
+        <p>A white-label commerce and customer-experience system for airlines.</p></article>
+    </div>
+  </div></section>
+
+  <section id="how"><div class="wrap">
+    <h2>How It Works</h2>
+    <p class="lead">One strong product, tailored to every client.</p>
+    <div class="grid">
+      <div class="glass card step"><div class="n">01</div><h3>License</h3><p>Choose a ready-made core product that fits your industry.</p></div>
+      <div class="glass card step"><div class="n">02</div><h3>Customize</h3><p>We adapt branding, features and integrations to your needs.</p></div>
+      <div class="glass card step"><div class="n">03</div><h3>Deploy</h3><p>Your own live, documented and supported system.</p></div>
+    </div>
+  </div></section>
+
+  <section id="contact"><div class="wrap">
+    <form class="glass contact" action="mailto:hello@example.com" method="post" enctype="text/plain">
+      <h2>Let's Talk</h2>
+      <p>Tell us what you need and we'll reply.</p>
+      <input class="field" type="text" name="name" placeholder="Name" required>
+      <input class="field" type="email" name="email" placeholder="Email" required>
+      <input class="field" type="text" name="message" placeholder="What do you need?">
+      <button class="btn" type="submit">Send</button>
+    </form>
+  </div></section>
+</main>
+
+<footer>©️ <span id="y"></span> The Foxverse. All rights reserved.</footer>
+
+<script>
+document.getElementById('y').textContent=new Date().getFullYear();
+var links=document.querySelectorAll('.nav a');
+var obs=new IntersectionObserver(function(es){
+  es.forEach(function(e){
+    if(e.isIntersecting){
+      links.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id)});
+    }
+  });
+},{rootMargin:'-45% 0px -45% 0px'});
+document.querySelectorAll('header[id],section[id]').forEach(function(s){obs.observe(s)});
+</script>
+</body>
+</html>
